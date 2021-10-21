@@ -1,0 +1,25 @@
+{
+  "name": "mail-compose",
+  "version": "0.1.0",
+  "description": "",
+  "main": "mail.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hehongbo/node-mail-compose.git"
+  },
+  "files": [
+    "mail.js",
+    "mail-message.js",
+    "file.js",
+    "multipart.js"
+  ],
+  "author": "Hongbo He",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hehongbo/node-mail-compose/issues"
+  },
+  "homepage": "https://github.com/hehongbo/node-mail-compose#readme",
+  "dependencies": {
+    "mime": "^2.5.2"
+  }
+}

@@ -1,0 +1,17 @@
+kind: pipeline
+name: Publish_to_npm
+type: docker
+
+trigger:
+  event:
+  - tag
+
+steps:
+- name: publish
+  image: node:alpine
+  environment:
+    NPM_ACCESS_TOKEN:
+      from_secret: NPM_ACCESS_TOKEN
+  commands:
+  - npm set //registry.npmjs.org/:_authToken $NPM_ACCESS_TOKEN
+  - npm publish
