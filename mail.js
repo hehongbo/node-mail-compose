@@ -142,7 +142,7 @@ module.exports = class {
                 } else {
                     body = new Multipart({type: "multipart/alternative", components: messageBodyParts});
                 }
-                if (inlineAssets.length > 0) {
+                if (inlineAssets && inlineAssets.length > 0) {
                     let relatedComponents = [body].concat(inlineAssets);
                     body = new Multipart({type: "multipart/related", components: relatedComponents});
                 }
