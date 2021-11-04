@@ -131,7 +131,7 @@ module.exports = class {
                             messageBodyParts.push(new MailMessage({content: message.htmlText, type: "text/html"}));
                             if (message.hasOwnProperty("assets")) {
                                 if (Array.isArray(message.assets)) {
-                                    inlineAssets = parseFiles(message.assets);
+                                    inlineAssets = parseFiles(message.assets, true);
                                 } else throw errors.invalidParam;
                             }
                         }

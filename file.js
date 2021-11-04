@@ -18,6 +18,7 @@ module.exports = class {
         return (
             `Content-Type: ${this.mime}\r\n` +
             "Content-Transfer-Encoding: base64\r\n" +
+            (this.inline ? `Content-ID: ${this.filename}\r\n` : "") +
             `Content-Disposition: ${this.inline ? "inline" : "attachment"}; filename=${this.filename}\r\n`
         );
     }
