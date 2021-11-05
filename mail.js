@@ -10,12 +10,16 @@ const errors = {
     attachmentFileNotExisted: new Error("ATTACHMENT_NOT_EXISTED")
 };
 
+const headerEncode = string => /^[\x00-\x7F]*$/.test(string) ?
+    string
+    : `=?UTF-8?B?${Buffer.from(string, "utf-8").toString("base64")}?=`;
+
 const parseRecipient = (
     {
         name = "",
         address = ""
     }
-) => `"${name}" <${address}>`;
+) => `"${headerEncode(name)}" <${address}>`;
 
 const parseFiles = (files = [], inline = false) => {
     let parsedFiles = [];
@@ -175,7 +179,7 @@ module.exports = class {
         }
         header += `To: ${this.to}\r\n`;
         if (this.subject) {
-            header += `Subject: ${this.subject}\r\n`;
+            header += `Subject: ${headerEncode(this.subject)}\r\n`;
         }
         header += "MIME-Version: 1.0\r\n";
         if (this.body) {

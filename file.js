@@ -19,7 +19,11 @@ module.exports = class {
             `Content-Type: ${this.mime}\r\n` +
             "Content-Transfer-Encoding: base64\r\n" +
             (this.inline ? `Content-ID: ${this.filename}\r\n` : "") +
-            `Content-Disposition: ${this.inline ? "inline" : "attachment"}; filename=${this.filename}\r\n`
+            `Content-Disposition: ${this.inline ? "inline" : "attachment"}; filename="${
+                /^[\x00-\x7F]*$/.test(this.filename) ?
+                    this.filename
+                    : `=?UTF-8?B?${Buffer.from(this.filename, "utf-8").toString("base64")}?=`
+            }"\r\n`
         );
     }
 
