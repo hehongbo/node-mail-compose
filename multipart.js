@@ -1,9 +1,4 @@
-const generateBoundary = () => {
-    let identifier = [...Array(32)].map(
-        () => Math.floor(Math.random() * 16).toString(16)
-    ).join('');
-    return `boundary-${identifier}`;
-};
+const crypto = require("crypto");
 
 const types = [
     "multipart/mixed",
@@ -19,7 +14,7 @@ class Multipart {
             this.type = type;
         }
         this.components = components;
-        this.boundary = generateBoundary();
+        this.boundary = `boundary-${crypto.randomBytes(16).toString("hex")}`;
     }
 
     mimeHeader() {
