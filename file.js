@@ -1,7 +1,7 @@
 const mime = require("mime");
 const path = require("path");
 
-module.exports = class {
+class File {
     constructor({filename = "", content, inline = false}) {
         this.filename = filename;
         if (Buffer.isBuffer(content)) {
@@ -30,4 +30,6 @@ module.exports = class {
     encode() {
         return this.content.toString("base64").match(/.{1,75}/g).join("\r\n") + "\r\n";
     }
-};
+}
+
+module.exports = File;

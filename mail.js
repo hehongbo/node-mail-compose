@@ -57,7 +57,7 @@ const parseFiles = (files = [], inline = false) => {
     return parsedFiles;
 };
 
-module.exports = class {
+class Mail {
     constructor(
         {
             from,
@@ -197,4 +197,6 @@ module.exports = class {
     getMail() {
         return this.getMailHeader() + "\r\n" + this.getMailBody();
     }
-};
+}
+
+module.exports = Mail;

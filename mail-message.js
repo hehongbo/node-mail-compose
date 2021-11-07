@@ -1,4 +1,4 @@
-module.exports = class {
+class MailMessage {
     constructor({
         content = "",
         type = "text/plain",
@@ -18,3 +18,5 @@ module.exports = class {
         return Buffer.from(this.content, "utf-8").toString("base64").match(/.{1,75}/g).join("\r\n") + "\r\n";
     }
 }
+
+module.exports = MailMessage;
