@@ -8,6 +8,9 @@ A simple library that composes MIME-encoded emails from human-friendly contents 
 
 This library is still considered experimental and needs a lot of tweaks potentially. It's okay to play around but keep in mind that the mail composed out of this library may not be understood correctly by all MUAs, including desktop and web clients, and everything is subject to change.
 
+> From version `0.2.0`, this library will assign a Content-ID for each embedded asset, and insert the `cid` into where they're used in `message.htmlText`. \
+> Using the filename as a `cid` will no longer work.
+
 ## Basic Usage
 
 Install the package:
@@ -115,7 +118,7 @@ It's also possible to embed image assets into the mail's body.
 let mail = new Mail({
     /* sender and recipient ... */
     message: {
-        htmlText: "<p>My new haircut!</p><img src=\"cid:new_look.jpg\">",
+        htmlText: "<p>My new haircut!</p><img src=\"new_look.jpg\">",
         plainText: "My new haircut!",
         assets: [
             {

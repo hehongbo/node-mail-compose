@@ -132,11 +132,19 @@ class Mail {
                 if (message.hasOwnProperty("htmlText")) {
                     if (typeof message.htmlText === "string") {
                         if (message.htmlText !== "") {
-                            messageBodyParts.push(new MailMessage({content: message.htmlText, type: "text/html"}));
                             if (message.hasOwnProperty("assets")) {
                                 if (Array.isArray(message.assets)) {
                                     inlineAssets = parseFiles(message.assets, true);
+                                    let cidIndex = {};
+                                    inlineAssets.forEach(asset => cidIndex[asset.filename] = asset.contentID);
+                                    messageBodyParts.push(new MailMessage({
+                                        content: message.htmlText,
+                                        type: "text/html",
+                                        cidIndex: cidIndex
+                                    }));
                                 } else throw errors.invalidParam;
+                            } else {
+                                messageBodyParts.push(new MailMessage({content: message.htmlText, type: "text/html"}));
                             }
                         }
                     } else throw errors.invalidParam;

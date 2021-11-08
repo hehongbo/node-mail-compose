@@ -2,9 +2,22 @@ class MailMessage {
     constructor({
         content = "",
         type = "text/plain",
+        cidIndex = {}
     }) {
         this.content = content;
         this.type = type;
+        if (type === "text/html") {
+            this.alterContentID(cidIndex);
+        }
+    }
+
+    alterContentID(cidIndex = {}) {
+        for (const cidIndexKey in cidIndex) {
+            this.content = this.content.replaceAll(
+                new RegExp(`src=["']${cidIndexKey}["']`, "g"),
+                found => found.replace(cidIndexKey, `cid:${cidIndex[cidIndexKey]}`)
+            );
+        }
     }
 
     mimeHeader() {
