@@ -1,6 +1,6 @@
 {
   "name": "mail-compose",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "A simple library that composes MIME-encoded emails from human-friendly contents.",
   "main": "mail.js",
   "keywords": [
